@@ -15,7 +15,7 @@ namespace GetpointsCount
             char extentsDivider = ' ';
             int minRangeValue = int.MinValue;
             int maxRangeValue = int.MaxValue;
-            int numberOfRecords = 100000;
+            int numberOfRecords = Convert.ToInt32(ConfigurationManager.AppSettings["NO_OF_RECORDS"]);
 
             GenerateFiles.GenerateExtents(extentsDivider, numberOfRecords, minRangeValue, maxRangeValue);
             GenerateFiles.GeneratePoints(numberOfRecords, minRangeValue, maxRangeValue);
