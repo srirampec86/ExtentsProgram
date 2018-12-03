@@ -22,7 +22,7 @@ namespace GetpointsCount
 
             var reader = new StreamReader(ConfigurationManager.AppSettings["EXTENTS_FILE_PATH"]);
 
-            var rootNode = default(RangeNode);
+            var rootNode = new RangeNode(0, 0);
 
             int counter = 0;
             while (!reader.EndOfStream)
@@ -50,7 +50,8 @@ namespace GetpointsCount
                 int count = Helper.GetRangeCount(value, rootNode);
                 writer.WriteLine(string.Format("{0} {1} {2}", counter, value, count));
             }
-
+            writer.Flush();
+            writer.Close();
    
             Console.ReadKey();
         }
@@ -63,6 +64,9 @@ namespace GetpointsCount
             {
                 if (node.MaxRightValue < addNode.MaxValue)
                     node.MaxRightValue = addNode.MaxValue;
+
+                if (node.MinLeftValue > addNode.MinValue)
+                    node.MinLeftValue = addNode.MinLeftValue;
 
                 if (addNode.MinValue < node.MinValue)
                 {
@@ -83,7 +87,7 @@ namespace GetpointsCount
             //Returns the Count of Points between the Extents
             public static int GetRangeCount(int value, RangeNode node)
             {
-                if (node == null || node.MaxRightValue < value)
+                if (node == null || node.MaxRightValue < value ||node.MinLeftValue > value)
                     return 0;
                 else if (node.MinValue > value)
                     return GetRangeCount(value, node.Left);
@@ -108,10 +112,12 @@ namespace GetpointsCount
             this.MinValue = minValue;
             this.MaxValue = maxValue;
             this.MaxRightValue = maxValue;
+            this.MinLeftValue = minValue;
         }
         public int MinValue { get; private set; }
         public int MaxValue { get; private set; }
         public int MaxRightValue { get; set; }
+        public int MinLeftValue { get; set; }
 
         public RangeNode Left { get; set; }
         public RangeNode Right { get; set; }
@@ -125,7 +131,7 @@ namespace GetpointsCount
         {
             Random rnd = new Random();
 
-            StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["EXTENTS_FILE_PATH"], true); 
+            StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["EXTENTS_FILE_PATH"], true);
 
             for (int i = 0; i < count; i++)
             {
