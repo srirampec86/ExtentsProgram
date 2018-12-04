@@ -4,3 +4,9 @@ D:\My Projects\ExtentProgram\ExtentProgram\bin\Debug\ExtentProgram.pdb
 D:\My Projects\ExtentProgram\ExtentProgram\obj\Debug\ExtentProgram.csprojResolveAssemblyReference.cache
 D:\My Projects\ExtentProgram\ExtentProgram\obj\Debug\ExtentProgram.exe
 D:\My Projects\ExtentProgram\ExtentProgram\obj\Debug\ExtentProgram.pdb
+D:\GitHub Repository\ExtentsProgram\ExtentProgram\ExtentProgram\bin\Debug\ExtentProgram.exe.config
+D:\GitHub Repository\ExtentsProgram\ExtentProgram\ExtentProgram\obj\Debug\ExtentProgram.exe
+D:\GitHub Repository\ExtentsProgram\ExtentProgram\ExtentProgram\obj\Debug\ExtentProgram.pdb
+D:\GitHub Repository\ExtentsProgram\ExtentProgram\ExtentProgram\bin\Debug\ExtentProgram.exe
+D:\GitHub Repository\ExtentsProgram\ExtentProgram\ExtentProgram\bin\Debug\ExtentProgram.pdb
+D:\GitHub Repository\ExtentsProgram\ExtentProgram\ExtentProgram\obj\Debug\ExtentProgram.csprojResolveAssemblyReference.cache

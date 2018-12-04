@@ -22,7 +22,7 @@ namespace GetpointsCount
 
             var reader = new StreamReader(ConfigurationManager.AppSettings["EXTENTS_FILE_PATH"]);
 
-            var rootNode = new RangeNode(0, 0);
+            var rootNode = new RangeNode(-1, 1);
 
             int counter = 0;
             while (!reader.EndOfStream)
@@ -72,6 +72,8 @@ namespace GetpointsCount
                 {
                     if (node.Left == null)
                         node.Left = addNode;
+                    else if (node.Right == null)
+                        node.Right = addNode;
                     else
                         AddNode(node.Left, addNode);
                 }
@@ -79,6 +81,8 @@ namespace GetpointsCount
                 {
                     if (node.Right == null)
                         node.Right = addNode;
+                    else if (node.Left == null)
+                        node.Left = addNode;
                     else
                         AddNode(node.Right, addNode);
                 }
@@ -87,18 +91,16 @@ namespace GetpointsCount
             //Returns the Count of Points between the Extents
             public static int GetRangeCount(int value, RangeNode node)
             {
-                if (node == null || node.MaxRightValue < value ||node.MinLeftValue > value)
+                if (node == null || (value < node.MinLeftValue || value > node.MaxRightValue))
                     return 0;
-                else if (node.MinValue > value)
-                    return GetRangeCount(value, node.Left);
                 else
                 {
                     int result = 0;
 
-                    if (value <= node.MaxValue)
-                        result = 1;
-
-                    return result + GetRangeCount(value, node.Right) + GetRangeCount(value, node.Left);
+                    if (value>=node.MinValue && value <= node.MaxValue)
+                    result = 1;
+                    
+                    return result + GetRangeCount(value, node.Left) + GetRangeCount(value, node.Right);                                            
                 }
             }
         }
